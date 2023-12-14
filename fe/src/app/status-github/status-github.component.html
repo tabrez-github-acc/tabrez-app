@@ -1,0 +1,45 @@
+<div class="py-5">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="flex flex-row items-center gap-2">
+            <h3 class="text-lg">Github</h3>
+            <mat-icon *ngIf="showStatus" color="primary">check_circle</mat-icon>
+            <mat-icon *ngIf="showStatus">history</mat-icon>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+          <div *ngIf="showStatus" class="w-full text-right">
+            <p class="text-right">
+              Admin: Last Synced:
+              {{ accessDetails.createdAt | date : "medium" }}
+            </p>
+            <p>Sync Type : full</p>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="!showStatus" class="w-full text-center">
+        <button
+          type="button"
+          (click)="connectToGithub()"
+          mat-raised-button
+          color="primary"
+        >
+          {{ buttonData.label }}
+        </button>
+        <h3 class="text-lg font-medium mt-4">Connect Sredio to Github</h3>
+      </div>
+      <div *ngIf="showStatus" class="w-full text-right mt-4">
+        <button
+          type="button"
+          (click)="disconnectFromGithub()"
+          mat-raised-button
+          color="primary"
+        >
+          Remove
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
