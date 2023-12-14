@@ -1,22 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require("dotenv");
 
-const { MONGODB_URI } = require("./src/appConstans");
 const { integrationRoutes } = require("./src/routes/integrationRoutes");
 const { mainRoutes } = require("./src/routes/mainRoutes");
 
+dotenv.config();
 const app = express();
-const port = 3000;
 
-app.use(cors());
+var corsOptions = {
+  origin: "http://127.0.0.1:4200",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use("/", mainRoutes);
 app.use("/integration", integrationRoutes);
 
-mongoose.connect(MONGODB_URI).then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("App connected to Database");
 });
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+app.listen(process.env.APP_PORT, () => {
+  console.log(`App listening at http://localhost:${process.env.APP_PORT}`);
 });

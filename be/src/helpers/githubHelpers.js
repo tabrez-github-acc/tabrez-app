@@ -1,22 +1,15 @@
 const fetch = require("node-fetch");
 
-const {
-  GITHUB_CLIENT_ID,
-  GITHUB_SCOPE,
-  GITHUB_CLIENT_SECRET,
-} = require("../appConstans");
-const { response } = require("express");
-
 const getURL = () => {
-  return `https://github.com/login/oauth/authorize?scope=${GITHUB_SCOPE}&client_id=${GITHUB_CLIENT_ID}`;
+  return `https://github.com/login/oauth/authorize?scope=${process.env.GITHUB_SCOPE}&client_id=${process.env.GITHUB_CLIENT_ID}`;
 };
 
 const createToken = async (requestToken) => {
   const response = await fetch("https://github.com/login/oauth/access_token", {
     method: "POST",
     body: JSON.stringify({
-      client_id: GITHUB_CLIENT_ID,
-      client_secret: GITHUB_CLIENT_SECRET,
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
       code: requestToken,
     }),
     headers: {
