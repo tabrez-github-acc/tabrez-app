@@ -1,5 +1,3 @@
-const { get } = require("mongoose");
-
 const {
   getURL,
   createToken,
@@ -60,6 +58,7 @@ const getStatus = async (req, res) => {
       userEmail,
     });
   } catch (error) {
+    console.log(error);
     res.status(404).json({
       error: "Access ID not found",
     });
@@ -74,9 +73,11 @@ const removeToken = async (req, res) => {
       return res.status(404).json({
         error: "Access ID not found",
       });
-    await githubIntegrationModel.findByIdAndDelete(access_id);
+    const deleteResult = await githubIntegrationModel.findByIdAndDelete(
+      access_id
+    );
     res.status(200).json({
-      message: "Access ID removed",
+      message: `Access ID ${deleteResult._id} removed`,
     });
   } catch (error) {
     res.status(404).json({

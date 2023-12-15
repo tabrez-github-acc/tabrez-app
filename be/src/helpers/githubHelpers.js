@@ -17,7 +17,7 @@ const createToken = async (requestToken) => {
       Accept: "application/json",
     },
   });
-  return response.json();
+  return await response.json();
 };
 
 const getUser = async (token) => {
@@ -26,7 +26,7 @@ const getUser = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.json();
+  return await response.json();
 };
 
 const getUserEmail = async (token) => {
@@ -35,7 +35,7 @@ const getUserEmail = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.json();
+  return await response.json();
 };
 
 module.exports = {
