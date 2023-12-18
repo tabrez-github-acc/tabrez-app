@@ -9,7 +9,7 @@ import { GithubIntegrationService } from '../github-integration.service';
   styleUrls: ['./callback-github.component.css'],
 })
 export class CallbackGithubComponent implements OnInit {
-  status = 'Loading...';
+  status: undefined | string = 'Loading...';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -19,7 +19,6 @@ export class CallbackGithubComponent implements OnInit {
   ngOnInit(): void {
     const code = this.route.snapshot.queryParamMap.get('code');
     this.githubIntegration.getAccessID(code).subscribe((data) => {
-      console.log(data);
       if (data.access_id) {
         sessionStorage.setItem('access_id', data.access_id);
         this.router.navigate(['/']);

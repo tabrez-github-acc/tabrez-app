@@ -3,7 +3,7 @@
 Frontend
 
     npm install
-    ng serve --host=127.0.0.1 --open
+    npm start
 
 Backend
 

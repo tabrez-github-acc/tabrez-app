@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GithubIntegrationService } from '../github-integration.service';
+import {
+  GithubIntegrationService,
+  IntegrationURLResponse,
+  IntegrationStatusResponse,
+} from '../github-integration.service';
 
 @Component({
   selector: 'app-status-github',
@@ -8,10 +12,13 @@ import { GithubIntegrationService } from '../github-integration.service';
   styleUrls: ['./status-github.component.css'],
 })
 export class StatusGithubComponent implements OnInit {
-  panelOpenState = false;
-  buttonData = { url: '', label: 'Loading...' };
+  buttonData: IntegrationURLResponse = { url: '', label: 'Loading...' };
   showStatus = false;
-  accessDetails = { createdAt: '', scope: '' };
+  accessDetails: IntegrationStatusResponse = {
+    status: '',
+    createdAt: '',
+    scope: '',
+  };
   constructor(private githubIntegration: GithubIntegrationService) {}
 
   ngOnInit(): void {
@@ -22,7 +29,6 @@ export class StatusGithubComponent implements OnInit {
         this.showStatus = true;
       });
     }
-
     this.getConnectURL();
   }
 
@@ -38,7 +44,7 @@ export class StatusGithubComponent implements OnInit {
 
   disconnectFromGithub(): void {
     const access_id = sessionStorage.getItem('access_id');
-    this.githubIntegration.removeAccessID(access_id).subscribe((data) => {
+    this.githubIntegration.removeAccessID(access_id).subscribe(() => {
       sessionStorage.removeItem('access_id');
       this.showStatus = false;
     });
