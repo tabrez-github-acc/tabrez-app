@@ -18,4 +18,4 @@ Backend .env
     GITHUB_SCOPE = "user:email"
     MONGODB_URI="mongodb+srv://XXX:XXX@cluster0.i9fkpne.mongodb.net/integrations"
 
-Edited
+Edited Edited
