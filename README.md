@@ -17,3 +17,5 @@ Backend .env
     GITHUB_CLIENT_SECRET = "XXX"
     GITHUB_SCOPE = "user:email"
     MONGODB_URI="mongodb+srv://XXX:XXX@cluster0.i9fkpne.mongodb.net/integrations"
+
+Edited
